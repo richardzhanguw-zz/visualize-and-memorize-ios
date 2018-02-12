@@ -14,6 +14,7 @@
 		81244AB820311E1E00BF7CCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81244AB620311E1E00BF7CCB /* LaunchScreen.storyboard */; };
 		81244AC320311E1E00BF7CCB /* Visualize_and_MemorizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81244AC220311E1E00BF7CCB /* Visualize_and_MemorizeTests.swift */; };
 		81244ACE20311E1E00BF7CCB /* Visualize_and_MemorizeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81244ACD20311E1E00BF7CCB /* Visualize_and_MemorizeUITests.swift */; };
+		81244ADD2031263F00BF7CCB /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 81244ADC2031263F00BF7CCB /* Resnet50.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		81244AC920311E1E00BF7CCB /* Visualize and MemorizeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Visualize and MemorizeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81244ACD20311E1E00BF7CCB /* Visualize_and_MemorizeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualize_and_MemorizeUITests.swift; sourceTree = "<group>"; };
 		81244ACF20311E1E00BF7CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81244ADC2031263F00BF7CCB /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +99,13 @@
 		81244AAC20311E1E00BF7CCB /* Visualize and Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				81244ADB2031263F00BF7CCB /* Resources */,
+				81244AB920311E1E00BF7CCB /* Info.plist */,
 				81244AAD20311E1E00BF7CCB /* AppDelegate.swift */,
 				81244AAF20311E1E00BF7CCB /* ViewController.swift */,
 				81244AB120311E1E00BF7CCB /* Main.storyboard */,
 				81244AB420311E1E00BF7CCB /* Assets.xcassets */,
 				81244AB620311E1E00BF7CCB /* LaunchScreen.storyboard */,
-				81244AB920311E1E00BF7CCB /* Info.plist */,
 			);
 			path = "Visualize and Memorize";
 			sourceTree = "<group>";
@@ -123,6 +126,14 @@
 				81244ACF20311E1E00BF7CCB /* Info.plist */,
 			);
 			path = "Visualize and MemorizeUITests";
+			sourceTree = "<group>";
+		};
+		81244ADB2031263F00BF7CCB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				81244ADC2031263F00BF7CCB /* Resnet50.mlmodel */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81244AB020311E1E00BF7CCB /* ViewController.swift in Sources */,
+				81244ADD2031263F00BF7CCB /* Resnet50.mlmodel in Sources */,
 				81244AAE20311E1E00BF7CCB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
