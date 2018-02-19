@@ -10,8 +10,9 @@ import UIKit
 import ARKit
 import SceneKit
 import Vision
+import AVFoundation
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDelegate {
     
     var arView: ARSCNView!
     var requests = [VNRequest]()
@@ -19,14 +20,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     let customDispatchQueue = DispatchQueue(label: "Custom Dispatch Queue")
     let arSceneConfig = ARWorldTrackingConfiguration()
+    let speaker = AVSpeechSynthesizer()
+    var ttsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        arView = ARSCNView(frame: CGRect(x: 0, y: self.view.safeAreaInsets.top, width: self.view.frame.width, height: self.view.frame.height - self.view.safeAreaInsets.top - self.view.safeAreaInsets.bottom))
-        self.view.addSubview(arView)
-        arView.delegate = self
-        arView.scene = SCNScene()
-        arSceneConfig.planeDetection = .horizontal
+        setupUI()
+        speaker.delegate = self
         guard let mlModel = try? VNCoreMLModel(for: Resnet50().model) else {
             fatalError("Model does not exist")
         }
@@ -41,6 +41,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         })
         refreshScreen()
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -95,6 +97,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 fatalError(errorThrown.localizedDescription)
             }
         }
+    }
+    
+    func setupUI() {
+        arView = ARSCNView(frame: CGRect(x: 0, y: self.view.safeAreaInsets.top, width: self.view.frame.width, height: self.view.frame.height - self.view.safeAreaInsets.top - self.view.safeAreaInsets.bottom))
+        self.view.addSubview(arView)
+        arView.delegate = self
+        arView.scene = SCNScene()
+        arSceneConfig.planeDetection = .horizontal
+        ttsButton = UIButton(frame: CGRect(x: self.view.frame.width - 80.0, y: self.view.frame.height - self.view.safeAreaInsets.top - 80.0  , width: 70, height: 70))
+        ttsButton.layer.cornerRadius = ttsButton.frame.width/2
+        ttsButton.clipsToBounds = true
+        ttsButton.setImage(UIImage(named: "Volume Mute"), for: UIControlState.normal)
+        ttsButton.addTarget(self, action: #selector(self.onSpeakButtonClicked), for: .touchUpInside)
+        ttsButton.backgroundColor = UIColor.red
+        self.view.addSubview(ttsButton)
+    }
+    
+    func speak(withPhrase phrase: String){
+        let utterance = AVSpeechUtterance(string: phrase)
+        speaker.speak(utterance)
+    }
+    
+    @objc func onSpeakButtonClicked(){
+        ttsButton.setImage(UIImage(named: "Volume Up"), for: UIControlState.normal)
+        self.speak(withPhrase: self.mostRecentLocation)
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        ttsButton.setImage(UIImage(named: "Volume Mute"), for: UIControlState.normal)
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
