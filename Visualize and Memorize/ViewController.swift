@@ -17,12 +17,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
     var arView: ARSCNView!
     var requests = [VNRequest]()
     var mostRecentLocation : String = "none"
+    var currentlyDisplayedObjectName = ""
+    var ttsButton: UIButton!
+    var identifyNewObjectButton: UIButton!
+    var nodeCount = 0
     
     let customDispatchQueue = DispatchQueue(label: "Custom Dispatch Queue")
     let arSceneConfig = ARWorldTrackingConfiguration()
     let speaker = AVSpeechSynthesizer()
-    var currentlyDisplayedObjectName = ""
-    var ttsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +36,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
         let request = VNCoreMLRequest(model: mlModel, completionHandler: coreMLcompletionHandler)
         request.imageCropAndScaleOption = VNImageCropAndScaleOption.centerCrop
         requests = [request]
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-            let worldCoord : SCNVector3 = SCNVector3Make(0.0 ,0.0, -0.2)
-            let node : SCNNode = self.createLocationNode(withLocationName: self.mostRecentLocation)
-            self.currentlyDisplayedObjectName = self.mostRecentLocation
-            self.arView.scene.rootNode.addChildNode(node)
-            node.position = worldCoord
-        })
         refreshScreen()
     }
     
@@ -74,16 +69,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
     }
     
     func createLocationNode(withLocationName locationName : String) -> SCNNode {
+
         let depth = CGFloat(0.02)
+        let constraints = [SCNBillboardConstraint()]
+        constraints[0].freeAxes = SCNBillboardAxis.Y
         let text = SCNText(string: locationName, extrusionDepth: depth)
         let wrapperBubbleNode = SCNNode()
         text.chamferRadius = CGFloat(0.02)
         text.alignmentMode = kCAAlignmentCenter
         text.font = UIFont(name: "Courier-Bold", size: 0.1)
         let textNode = SCNNode(geometry: text)
-        textNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        textNode.scale = SCNVector3Make(0.15, 0.15, 0.15)
         textNode.pivot = SCNMatrix4MakeTranslation( (text.boundingBox.max.x - text.boundingBox.min.x)/2, text.boundingBox.min.y, Float(depth))
         wrapperBubbleNode.addChildNode(textNode)
+        wrapperBubbleNode.constraints = constraints
         return wrapperBubbleNode
     }
     
@@ -113,6 +112,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
         ttsButton.setImage(UIImage(named: "Volume Mute"), for: UIControlState.normal)
         ttsButton.addTarget(self, action: #selector(self.onSpeakButtonClicked), for: .touchUpInside)
         ttsButton.backgroundColor = UIColor.red
+        identifyNewObjectButton = UIButton(frame: CGRect(x: ttsButton.frame.minX - 80.0, y: ttsButton.frame.minY, width: 70, height: 70 ))
+        identifyNewObjectButton.layer.cornerRadius = identifyNewObjectButton.frame.width/2
+        identifyNewObjectButton.clipsToBounds = true
+        identifyNewObjectButton.addTarget(self, action: #selector(self.onIdentifyNewObjectButtonClicked), for: .touchUpInside)
+        identifyNewObjectButton.setImage(UIImage(named: "Add"), for: UIControlState.normal)
+        identifyNewObjectButton.backgroundColor = UIColor.green
+        self.view.addSubview(identifyNewObjectButton)
         self.view.addSubview(ttsButton)
     }
     
@@ -126,12 +132,30 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
         self.speak(withPhrase: self.currentlyDisplayedObjectName)
     }
     
+    @objc func onIdentifyNewObjectButtonClicked(){
+        if (nodeCount == 1) {
+            return
+        } else {
+            nodeCount += 1
+        }
+        let hitTestResults = arView.hitTest( CGPoint(x: self.arView.frame.midX, y: self.arView.frame.midY), types: [.featurePoint])
+        guard let firstHitTestResult = hitTestResults.first else {
+            return
+        }
+        let worldTransform = firstHitTestResult.worldTransform
+        let realLifeCoordinate = SCNVector3Make(worldTransform.columns.3.x, worldTransform.columns.3.y, worldTransform.columns.3.z)
+        let node : SCNNode = self.createLocationNode(withLocationName: self.mostRecentLocation)
+        self.currentlyDisplayedObjectName = self.mostRecentLocation
+        self.arView.scene.rootNode.addChildNode(node)
+        node.position = realLifeCoordinate
+    }
+
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         ttsButton.setImage(UIImage(named: "Volume Mute"), for: UIControlState.normal)
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        
+
     }
 }
 
