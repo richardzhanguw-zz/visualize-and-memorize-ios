@@ -21,6 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
     let customDispatchQueue = DispatchQueue(label: "Custom Dispatch Queue")
     let arSceneConfig = ARWorldTrackingConfiguration()
     let speaker = AVSpeechSynthesizer()
+    var currentlyDisplayedObjectName = ""
     var ttsButton: UIButton!
     
     override func viewDidLoad() {
@@ -36,6 +37,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
             let worldCoord : SCNVector3 = SCNVector3Make(0.0 ,0.0, -0.2)
             let node : SCNNode = self.createLocationNode(withLocationName: self.mostRecentLocation)
+            self.currentlyDisplayedObjectName = self.mostRecentLocation
             self.arView.scene.rootNode.addChildNode(node)
             node.position = worldCoord
         })
@@ -121,7 +123,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
     
     @objc func onSpeakButtonClicked(){
         ttsButton.setImage(UIImage(named: "Volume Up"), for: UIControlState.normal)
-        self.speak(withPhrase: self.mostRecentLocation)
+        self.speak(withPhrase: self.currentlyDisplayedObjectName)
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
