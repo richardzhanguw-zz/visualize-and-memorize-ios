@@ -12,7 +12,7 @@ import SceneKit
 import Vision
 import AVFoundation
 
-class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDelegate {
+class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDelegate {
     
     var arView: ARSCNView!
     var requests = [VNRequest]()

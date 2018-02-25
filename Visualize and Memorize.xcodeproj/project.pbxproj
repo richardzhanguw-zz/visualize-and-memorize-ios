@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		81244AAE20311E1E00BF7CCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81244AAD20311E1E00BF7CCB /* AppDelegate.swift */; };
-		81244AB020311E1E00BF7CCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81244AAF20311E1E00BF7CCB /* ViewController.swift */; };
+		81244AB020311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81244AAF20311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift */; };
 		81244AB320311E1E00BF7CCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81244AB120311E1E00BF7CCB /* Main.storyboard */; };
 		81244AB520311E1E00BF7CCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81244AB420311E1E00BF7CCB /* Assets.xcassets */; };
 		81244AB820311E1E00BF7CCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81244AB620311E1E00BF7CCB /* LaunchScreen.storyboard */; };
@@ -16,6 +16,8 @@
 		81244ACE20311E1E00BF7CCB /* Visualize_and_MemorizeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81244ACD20311E1E00BF7CCB /* Visualize_and_MemorizeUITests.swift */; };
 		81244ADD2031263F00BF7CCB /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 81244ADC2031263F00BF7CCB /* Resnet50.mlmodel */; };
 		8126A8A120424B6B0090378C /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126A8A020424B6B0090378C /* RoundButton.swift */; };
+		8126A8A32042761F0090378C /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126A8A22042761F0090378C /* HomeTableViewController.swift */; };
+		8126A8A520427A9E0090378C /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126A8A420427A9E0090378C /* HomeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,7 @@
 /* Begin PBXFileReference section */
 		81244AAA20311E1E00BF7CCB /* Visualize and Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Visualize and Memorize.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81244AAD20311E1E00BF7CCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		81244AAF20311E1E00BF7CCB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		81244AAF20311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectIdentifierCameraViewController.swift; sourceTree = "<group>"; };
 		81244AB220311E1E00BF7CCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		81244AB420311E1E00BF7CCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81244AB720311E1E00BF7CCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		81244ACF20311E1E00BF7CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81244ADC2031263F00BF7CCB /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
 		8126A8A020424B6B0090378C /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		8126A8A22042761F0090378C /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		8126A8A420427A9E0090378C /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,11 +108,13 @@
 				81244ADB2031263F00BF7CCB /* Resources */,
 				81244AB920311E1E00BF7CCB /* Info.plist */,
 				81244AAD20311E1E00BF7CCB /* AppDelegate.swift */,
-				81244AAF20311E1E00BF7CCB /* ViewController.swift */,
+				81244AAF20311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift */,
 				81244AB120311E1E00BF7CCB /* Main.storyboard */,
 				81244AB420311E1E00BF7CCB /* Assets.xcassets */,
 				81244AB620311E1E00BF7CCB /* LaunchScreen.storyboard */,
 				8126A8A020424B6B0090378C /* RoundButton.swift */,
+				8126A8A22042761F0090378C /* HomeTableViewController.swift */,
+				8126A8A420427A9E0090378C /* HomeTableViewCell.swift */,
 			);
 			path = "Visualize and Memorize";
 			sourceTree = "<group>";
@@ -273,10 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8126A8A520427A9E0090378C /* HomeTableViewCell.swift in Sources */,
 				8126A8A120424B6B0090378C /* RoundButton.swift in Sources */,
-				81244AB020311E1E00BF7CCB /* ViewController.swift in Sources */,
+				81244AB020311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift in Sources */,
 				81244ADD2031263F00BF7CCB /* Resnet50.mlmodel in Sources */,
 				81244AAE20311E1E00BF7CCB /* AppDelegate.swift in Sources */,
+				8126A8A32042761F0090378C /* HomeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
