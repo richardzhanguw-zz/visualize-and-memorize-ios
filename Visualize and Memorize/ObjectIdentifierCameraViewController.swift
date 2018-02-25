@@ -143,14 +143,14 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     }
     
     @objc func onIdentifyNewObjectButtonClicked(){
+        let hitTestResults = arView.hitTest( CGPoint(x: self.arView.frame.midX, y: self.arView.frame.midY), types: [.featurePoint])
+        guard let firstHitTestResult = hitTestResults.first else {
+            return
+        }
         if (nodeCount == 1) {
             return
         } else {
             nodeCount += 1
-        }
-        let hitTestResults = arView.hitTest( CGPoint(x: self.arView.frame.midX, y: self.arView.frame.midY), types: [.featurePoint])
-        guard let firstHitTestResult = hitTestResults.first else {
-            return
         }
         let worldTransform = firstHitTestResult.worldTransform
         let realLifeCoordinate = SCNVector3Make(worldTransform.columns.3.x, worldTransform.columns.3.y, worldTransform.columns.3.z)

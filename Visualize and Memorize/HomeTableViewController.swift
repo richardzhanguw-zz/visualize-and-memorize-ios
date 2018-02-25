@@ -15,6 +15,7 @@ class HomeTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Visualize and Memorize"
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.isScrollEnabled = false
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -26,16 +27,23 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = HomeTableViewCell(style: UITableViewCellStyle.default , reuseIdentifier: nil)
+        var cell: HomeTableViewCell = HomeTableViewCell()
         if (indexPath.row == 0) {
-            print("0")
+            cell = HomeTableViewCell(withText: "Visualize")
         } else if (indexPath.row == 1) {
-            print("1")
+            cell = HomeTableViewCell(withText: "Memorize")
         }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 150
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.row == 0) {
+            self.navigationController?.pushViewController(ObjectIdentifierCameraViewController(), animated: true)
+        }
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }
