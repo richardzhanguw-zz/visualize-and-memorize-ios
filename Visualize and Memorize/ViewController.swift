@@ -18,8 +18,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
     var requests = [VNRequest]()
     var mostRecentLocation : String = "none"
     var currentlyDisplayedObjectName = ""
-    var ttsButton: UIButton!
-    var identifyNewObjectButton: UIButton!
+    var ttsButton: RoundButton!
+    var identifyNewObjectButton: RoundButton!
     var nodeCount = 0
     
     let customDispatchQueue = DispatchQueue(label: "Custom Dispatch Queue")
@@ -106,18 +106,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
         arView.delegate = self
         arView.scene = SCNScene()
         arSceneConfig.planeDetection = .horizontal
-        ttsButton = UIButton(frame: CGRect(x: self.view.frame.width - 80.0, y: self.view.frame.height - self.view.safeAreaInsets.top - 80.0  , width: 70, height: 70))
-        ttsButton.layer.cornerRadius = ttsButton.frame.width/2
-        ttsButton.clipsToBounds = true
-        ttsButton.setImage(UIImage(named: "Volume Mute"), for: UIControlState.normal)
+        var ttsButtonFrame: CGRect
+        var identifyNewObjectButtonFrame: CGRect
+        if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
+            ttsButtonFrame = CGRect(x: self.view.frame.width - 80.0, y: self.view.frame.height - keyWindow.safeAreaInsets.bottom - 80.0, width: 70, height: 70)
+            identifyNewObjectButtonFrame =  CGRect(x: ttsButtonFrame.minX - 80.0, y: ttsButtonFrame.minY , width: 70, height: 70 )
+        } else {
+            ttsButtonFrame = CGRect(x: self.view.frame.width - 80.0, y: self.view.frame.height - 80.0  , width: 70, height: 70)
+            identifyNewObjectButtonFrame = CGRect(x: ttsButtonFrame.minX - 80.0, y: ttsButtonFrame.minY, width: 70, height: 70 )
+        }
+        ttsButton = RoundButton(withFrame:ttsButtonFrame , andButtonColour: UIColor.red, andImage: UIImage(named: "Volume Mute")!)
+        identifyNewObjectButton = RoundButton(withFrame:identifyNewObjectButtonFrame , andButtonColour: UIColor.green, andImage: UIImage(named: "Add")!)
         ttsButton.addTarget(self, action: #selector(self.onSpeakButtonClicked), for: .touchUpInside)
-        ttsButton.backgroundColor = UIColor.red
-        identifyNewObjectButton = UIButton(frame: CGRect(x: ttsButton.frame.minX - 80.0, y: ttsButton.frame.minY, width: 70, height: 70 ))
-        identifyNewObjectButton.layer.cornerRadius = identifyNewObjectButton.frame.width/2
-        identifyNewObjectButton.clipsToBounds = true
         identifyNewObjectButton.addTarget(self, action: #selector(self.onIdentifyNewObjectButtonClicked), for: .touchUpInside)
-        identifyNewObjectButton.setImage(UIImage(named: "Add"), for: UIControlState.normal)
-        identifyNewObjectButton.backgroundColor = UIColor.green
         self.view.addSubview(identifyNewObjectButton)
         self.view.addSubview(ttsButton)
     }
