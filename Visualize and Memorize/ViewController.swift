@@ -20,6 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
     var currentlyDisplayedObjectName = ""
     var ttsButton: RoundButton!
     var identifyNewObjectButton: RoundButton!
+    var saveCurrentObjectButton: RoundButton!
     var nodeCount = 0
     
     let customDispatchQueue = DispatchQueue(label: "Custom Dispatch Queue")
@@ -108,19 +109,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
         arSceneConfig.planeDetection = .horizontal
         var ttsButtonFrame: CGRect
         var identifyNewObjectButtonFrame: CGRect
+        var saveCurrentObjectButtonFrame: CGRect
         if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
-            ttsButtonFrame = CGRect(x: self.view.frame.width - 80.0, y: self.view.frame.height - keyWindow.safeAreaInsets.bottom - 80.0, width: 70, height: 70)
-            identifyNewObjectButtonFrame =  CGRect(x: ttsButtonFrame.minX - 80.0, y: ttsButtonFrame.minY , width: 70, height: 70 )
+            identifyNewObjectButtonFrame = CGRect(x: self.view.frame.width/2 - 35, y: self.view.frame.height - keyWindow.safeAreaInsets.bottom - 80.0, width: 70, height: 70)
         } else {
-            ttsButtonFrame = CGRect(x: self.view.frame.width - 80.0, y: self.view.frame.height - 80.0  , width: 70, height: 70)
-            identifyNewObjectButtonFrame = CGRect(x: ttsButtonFrame.minX - 80.0, y: ttsButtonFrame.minY, width: 70, height: 70 )
+            identifyNewObjectButtonFrame = CGRect(x: self.view.frame.width/2, y: self.view.frame.height - 80.0, width: 70, height: 70)
         }
+        ttsButtonFrame = CGRect(x: identifyNewObjectButtonFrame.maxX + 10 , y: identifyNewObjectButtonFrame.minY, width: 70, height: 70 )
+        saveCurrentObjectButtonFrame = CGRect(x: identifyNewObjectButtonFrame.minX - 80.0, y: identifyNewObjectButtonFrame.minY , width: 70, height: 70 )
         ttsButton = RoundButton(withFrame:ttsButtonFrame , andButtonColour: UIColor.red, andImage: UIImage(named: "Volume Mute")!)
         identifyNewObjectButton = RoundButton(withFrame:identifyNewObjectButtonFrame , andButtonColour: UIColor.green, andImage: UIImage(named: "Add")!)
+        saveCurrentObjectButton = RoundButton(withFrame: saveCurrentObjectButtonFrame, andButtonColour: UIColor.blue, andImage: UIImage(named: "Save Object")!)
         ttsButton.addTarget(self, action: #selector(self.onSpeakButtonClicked), for: .touchUpInside)
         identifyNewObjectButton.addTarget(self, action: #selector(self.onIdentifyNewObjectButtonClicked), for: .touchUpInside)
+        saveCurrentObjectButton.addTarget(self, action: #selector(self.onSaveCurrentObjectButtonClicked), for: .touchUpInside)
         self.view.addSubview(identifyNewObjectButton)
         self.view.addSubview(ttsButton)
+        self.view.addSubview(saveCurrentObjectButton)
     }
     
     func speak(withPhrase phrase: String){
@@ -131,6 +136,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVSpeechSynthesizerDe
     @objc func onSpeakButtonClicked(){
         ttsButton.setImage(UIImage(named: "Volume Up"), for: UIControlState.normal)
         self.speak(withPhrase: self.currentlyDisplayedObjectName)
+    }
+    
+    @objc func onSaveCurrentObjectButtonClicked(){
+        print("save current object button clicked")
     }
     
     @objc func onIdentifyNewObjectButtonClicked(){
