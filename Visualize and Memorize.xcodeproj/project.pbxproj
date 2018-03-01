@@ -18,6 +18,8 @@
 		8126A8A120424B6B0090378C /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126A8A020424B6B0090378C /* RoundButton.swift */; };
 		8126A8A32042761F0090378C /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126A8A22042761F0090378C /* HomeTableViewController.swift */; };
 		8126A8A520427A9E0090378C /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126A8A420427A9E0090378C /* HomeTableViewCell.swift */; };
+		8156CBFA2047AB4D009CB80D /* MemorizeTableVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8156CBF92047AB4D009CB80D /* MemorizeTableVIewController.swift */; };
+		8156CBFC2047ACD3009CB80D /* MemorizeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8156CBFB2047ACD3009CB80D /* MemorizeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		8126A8A020424B6B0090378C /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		8126A8A22042761F0090378C /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		8126A8A420427A9E0090378C /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		8156CBF92047AB4D009CB80D /* MemorizeTableVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeTableVIewController.swift; sourceTree = "<group>"; };
+		8156CBFB2047ACD3009CB80D /* MemorizeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,8 @@
 				8126A8A020424B6B0090378C /* RoundButton.swift */,
 				8126A8A22042761F0090378C /* HomeTableViewController.swift */,
 				8126A8A420427A9E0090378C /* HomeTableViewCell.swift */,
+				8156CBF92047AB4D009CB80D /* MemorizeTableVIewController.swift */,
+				8156CBFB2047ACD3009CB80D /* MemorizeTableViewCell.swift */,
 			);
 			path = "Visualize and Memorize";
 			sourceTree = "<group>";
@@ -280,10 +286,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8126A8A520427A9E0090378C /* HomeTableViewCell.swift in Sources */,
+				8156CBFC2047ACD3009CB80D /* MemorizeTableViewCell.swift in Sources */,
 				8126A8A120424B6B0090378C /* RoundButton.swift in Sources */,
 				81244AB020311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift in Sources */,
 				81244ADD2031263F00BF7CCB /* Resnet50.mlmodel in Sources */,
 				81244AAE20311E1E00BF7CCB /* AppDelegate.swift in Sources */,
+				8156CBFA2047AB4D009CB80D /* MemorizeTableVIewController.swift in Sources */,
 				8126A8A32042761F0090378C /* HomeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

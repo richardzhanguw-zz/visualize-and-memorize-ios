@@ -43,6 +43,8 @@ class HomeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.row == 0) {
             self.navigationController?.pushViewController(ObjectIdentifierCameraViewController(), animated: true)
+        } else if (indexPath.row == 1){
+            self.navigationController?.pushViewController(MemorizeTableViewController(), animated: true)
         }
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
