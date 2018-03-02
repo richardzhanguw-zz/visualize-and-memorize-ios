@@ -19,6 +19,6 @@ class FileStorageManager {
     }
     
     func getVisualizedObject() -> VisualizedObject {
-        
+        return VisualizedObject(withImageName: "", andObjectName: "")
     }
 }
