@@ -22,6 +22,7 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     var identifyNewObjectButton: RoundButton!
     var saveCurrentObjectButton: RoundButton!
     var nodeCount = 0
+    var mostRecentVisualizedObject: VisualizedObject!
     
     let customDispatchQueue = DispatchQueue(label: "Custom Dispatch Queue")
     let arSceneConfig = ARWorldTrackingConfiguration()
@@ -44,12 +45,14 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         arView.session.run(arSceneConfig)
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         arView.session.pause()
     }
     
@@ -139,7 +142,7 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     }
     
     @objc func onSaveCurrentObjectButtonClicked(){
-        print("save current object button clicked")
+        self.navigationController?.pushViewController(SaveObjectViewController(withVisualizedObject: self.mostRecentVisualizedObject) , animated: true)
     }
     
     @objc func onIdentifyNewObjectButtonClicked(){
@@ -156,6 +159,7 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
         let realLifeCoordinate = SCNVector3Make(worldTransform.columns.3.x, worldTransform.columns.3.y, worldTransform.columns.3.z)
         let node : SCNNode = self.createLocationNode(withLocationName: self.mostRecentLocation)
         self.currentlyDisplayedObjectName = self.mostRecentLocation
+        self.mostRecentVisualizedObject = VisualizedObject(withImage: arView.snapshot(), andObjectName: self.currentlyDisplayedObjectName)
         self.arView.scene.rootNode.addChildNode(node)
         node.position = realLifeCoordinate
     }

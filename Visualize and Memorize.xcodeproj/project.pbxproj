@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81244790204A4E090043EB34 /* SaveObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8124478F204A4E090043EB34 /* SaveObjectViewController.swift */; };
 		81244AAE20311E1E00BF7CCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81244AAD20311E1E00BF7CCB /* AppDelegate.swift */; };
 		81244AB020311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81244AAF20311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift */; };
 		81244AB320311E1E00BF7CCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81244AB120311E1E00BF7CCB /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8124478F204A4E090043EB34 /* SaveObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveObjectViewController.swift; sourceTree = "<group>"; };
 		81244AAA20311E1E00BF7CCB /* Visualize and Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Visualize and Memorize.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81244AAD20311E1E00BF7CCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81244AAF20311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectIdentifierCameraViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				8156CBFB2047ACD3009CB80D /* MemorizeTableViewCell.swift */,
 				81498D272048F67C003A8942 /* VisualizedObject.swift */,
 				81498D292048FCC8003A8942 /* FileStorageManager.swift */,
+				8124478F204A4E090043EB34 /* SaveObjectViewController.swift */,
 			);
 			path = "Visualize and Memorize";
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				81498D282048F67C003A8942 /* VisualizedObject.swift in Sources */,
 				81244AAE20311E1E00BF7CCB /* AppDelegate.swift in Sources */,
 				8156CBFA2047AB4D009CB80D /* MemorizeTableVIewController.swift in Sources */,
+				81244790204A4E090043EB34 /* SaveObjectViewController.swift in Sources */,
 				8126A8A32042761F0090378C /* HomeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

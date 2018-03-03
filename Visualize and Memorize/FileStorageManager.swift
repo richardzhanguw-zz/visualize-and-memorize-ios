@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class FileStorageManager {
     
@@ -19,6 +20,6 @@ class FileStorageManager {
     }
     
     func getVisualizedObject() -> VisualizedObject {
-        return VisualizedObject(withImageName: "", andObjectName: "")
+        return VisualizedObject(withImage: UIImage(), andObjectName: "")
     }
 }

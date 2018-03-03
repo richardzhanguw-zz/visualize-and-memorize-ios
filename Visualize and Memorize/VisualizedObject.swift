@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 class VisualizedObject {
-    var imageName: String!
+    var image: UIImage!
     var objectName: String!
     
-    init(withImageName imageName: String, andObjectName objectName: String) {
-        self.imageName = imageName
+    init(withImage image: UIImage, andObjectName objectName: String) {
+        self.image = image
         self.objectName = objectName
     }
     
