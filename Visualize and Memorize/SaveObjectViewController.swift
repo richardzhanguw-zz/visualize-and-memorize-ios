@@ -16,21 +16,21 @@ class SaveObjectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
-        self.objectImageView = UIImageView(image: visualizedObject.image)
-        self.objectImageView.frame = self.view.frame
-        self.view.addSubview(self.objectImageView)
+        view.backgroundColor = UIColor.white
+        objectImageView = UIImageView(image: visualizedObject.image)
+        objectImageView.frame = self.view.frame
+        view.addSubview(self.objectImageView)
     }
     
     init(withVisualizedObject object: VisualizedObject) {
         super.init(nibName: nil, bundle: nil)
-        self.visualizedObject = object
-        self.setupUI()
+        visualizedObject = object
+        setupUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(nibName: nil, bundle: nil)
-        self.setupUI()
+        setupUI()
     }
     
     func setupUI() {

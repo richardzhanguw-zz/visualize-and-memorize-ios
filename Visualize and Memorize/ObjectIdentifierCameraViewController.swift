@@ -45,14 +45,14 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
         arView.session.run(arSceneConfig)
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         arView.session.pause()
     }
     
@@ -105,8 +105,8 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     }
     
     func setupUI() {
-        arView = ARSCNView(frame: CGRect(x: 0, y: self.view.safeAreaInsets.top, width: self.view.frame.width, height: self.view.frame.height - self.view.safeAreaInsets.top - self.view.safeAreaInsets.bottom))
-        self.view.addSubview(arView)
+        arView = ARSCNView(frame: CGRect(x: 0, y: view.safeAreaInsets.top, width: view.frame.width, height: view.frame.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom))
+        view.addSubview(arView)
         arView.delegate = self
         arView.scene = SCNScene()
         arSceneConfig.planeDetection = .horizontal
@@ -114,21 +114,21 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
         var identifyNewObjectButtonFrame: CGRect
         var saveCurrentObjectButtonFrame: CGRect
         if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
-            identifyNewObjectButtonFrame = CGRect(x: self.view.frame.width/2 - 35, y: self.view.frame.height - keyWindow.safeAreaInsets.bottom - 80.0, width: 70, height: 70)
+            identifyNewObjectButtonFrame = CGRect(x: view.frame.width/2 - 35, y: view.frame.height - keyWindow.safeAreaInsets.bottom - 80.0, width: 70, height: 70)
         } else {
-            identifyNewObjectButtonFrame = CGRect(x: self.view.frame.width/2, y: self.view.frame.height - 80.0, width: 70, height: 70)
+            identifyNewObjectButtonFrame = CGRect(x: view.frame.width/2, y: view.frame.height - 80.0, width: 70, height: 70)
         }
         ttsButtonFrame = CGRect(x: identifyNewObjectButtonFrame.maxX + 10 , y: identifyNewObjectButtonFrame.minY, width: 70, height: 70 )
         saveCurrentObjectButtonFrame = CGRect(x: identifyNewObjectButtonFrame.minX - 80.0, y: identifyNewObjectButtonFrame.minY , width: 70, height: 70 )
         ttsButton = RoundButton(withFrame:ttsButtonFrame , andButtonColour: UIColor.red, andImage: UIImage(named: "Volume Mute")!)
         identifyNewObjectButton = RoundButton(withFrame:identifyNewObjectButtonFrame , andButtonColour: UIColor.green, andImage: UIImage(named: "Add")!)
         saveCurrentObjectButton = RoundButton(withFrame: saveCurrentObjectButtonFrame, andButtonColour: UIColor.blue, andImage: UIImage(named: "Save Object")!)
-        ttsButton.addTarget(self, action: #selector(self.onSpeakButtonClicked), for: .touchUpInside)
-        identifyNewObjectButton.addTarget(self, action: #selector(self.onIdentifyNewObjectButtonClicked), for: .touchUpInside)
-        saveCurrentObjectButton.addTarget(self, action: #selector(self.onSaveCurrentObjectButtonClicked), for: .touchUpInside)
-        self.view.addSubview(identifyNewObjectButton)
-        self.view.addSubview(ttsButton)
-        self.view.addSubview(saveCurrentObjectButton)
+        ttsButton.addTarget(self, action: #selector(onSpeakButtonClicked), for: .touchUpInside)
+        identifyNewObjectButton.addTarget(self, action: #selector(onIdentifyNewObjectButtonClicked), for: .touchUpInside)
+        saveCurrentObjectButton.addTarget(self, action: #selector(onSaveCurrentObjectButtonClicked), for: .touchUpInside)
+        view.addSubview(identifyNewObjectButton)
+        view.addSubview(ttsButton)
+        view.addSubview(saveCurrentObjectButton)
     }
     
     func speak(withPhrase phrase: String){
@@ -138,15 +138,15 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     
     @objc func onSpeakButtonClicked(){
         ttsButton.setImage(UIImage(named: "Volume Up"), for: UIControlState.normal)
-        self.speak(withPhrase: self.currentlyDisplayedObjectName)
+        speak(withPhrase: currentlyDisplayedObjectName)
     }
     
     @objc func onSaveCurrentObjectButtonClicked(){
-        self.navigationController?.pushViewController(SaveObjectViewController(withVisualizedObject: self.mostRecentVisualizedObject) , animated: true)
+        self.navigationController?.pushViewController(SaveObjectViewController(withVisualizedObject: mostRecentVisualizedObject) , animated: true)
     }
     
     @objc func onIdentifyNewObjectButtonClicked(){
-        let hitTestResults = arView.hitTest( CGPoint(x: self.arView.frame.midX, y: self.arView.frame.midY), types: [.featurePoint])
+        let hitTestResults = arView.hitTest( CGPoint(x: arView.frame.midX, y: arView.frame.midY), types: [.featurePoint])
         guard let firstHitTestResult = hitTestResults.first else {
             return
         }
@@ -157,10 +157,10 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
         }
         let worldTransform = firstHitTestResult.worldTransform
         let realLifeCoordinate = SCNVector3Make(worldTransform.columns.3.x, worldTransform.columns.3.y, worldTransform.columns.3.z)
-        let node : SCNNode = self.createLocationNode(withLocationName: self.mostRecentLocation)
-        self.currentlyDisplayedObjectName = self.mostRecentLocation
-        self.mostRecentVisualizedObject = VisualizedObject(withImage: arView.snapshot(), andObjectName: self.currentlyDisplayedObjectName)
-        self.arView.scene.rootNode.addChildNode(node)
+        let node : SCNNode = createLocationNode(withLocationName: mostRecentLocation)
+        currentlyDisplayedObjectName = mostRecentLocation
+        mostRecentVisualizedObject = VisualizedObject(withImage: arView.snapshot(), andObjectName: currentlyDisplayedObjectName)
+        arView.scene.rootNode.addChildNode(node)
         node.position = realLifeCoordinate
     }
 

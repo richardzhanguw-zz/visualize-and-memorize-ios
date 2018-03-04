@@ -21,10 +21,10 @@ class RoundButton: UIButton {
     
     init(withFrame frame: CGRect, andButtonColour buttonColour: UIColor, andImage image: UIImage) {
         super.init(frame:frame)
-        self.layer.cornerRadius = self.frame.width/2
-        self.clipsToBounds = true
-        self.setImage(image, for: UIControlState.normal)
-        self.backgroundColor = buttonColour
+        layer.cornerRadius = self.frame.width/2
+        clipsToBounds = true
+        setImage(image, for: UIControlState.normal)
+        backgroundColor = buttonColour
     }
     
 }
