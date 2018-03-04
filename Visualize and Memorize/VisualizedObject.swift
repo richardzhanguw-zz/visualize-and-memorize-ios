@@ -21,10 +21,6 @@ class VisualizedObject {
         self.fileManager = FileManager.default
     }
     
-    func retrieveImage() {
-        
-    }
-    
     func saveImage() {
         do {
             let directory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
@@ -35,7 +31,7 @@ class VisualizedObject {
             let container = NSPersistentContainer(name: "CoreData")
             container.loadPersistentStores { (description, error) in
                 if let error = error {
-                    fatalError("Failed to load store: \(error)")
+                    fatalError(error.localizedDescription)
                 }
             }
             let context = container.viewContext

@@ -1,5 +1,5 @@
 //
-//  MemorizeTableVIewController.swift
+//  MemorizeTableViewController.swift
 //  Visualize and Memorize
 //
 //  Created by Richard Zhang on 2018-02-28.
@@ -14,6 +14,8 @@ class MemorizeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let fileManager = FileStorageManager()
+        let x = fileManager.getVisualizedObjects()
         
     }
     
