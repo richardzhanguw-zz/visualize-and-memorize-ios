@@ -8,14 +8,51 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class VisualizedObject {
     var image: UIImage!
-    var objectName: String!
-    
+    var imageName: String?
+    var objectName: String?
+    var fileManager: FileManager!
     init(withImage image: UIImage, andObjectName objectName: String) {
         self.image = image
         self.objectName = objectName
+        self.fileManager = FileManager.default
+    }
+    
+    func retrieveImage() {
+        
+    }
+    
+    func saveImage() {
+        do {
+            let directory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
+            let url = directory.appendingPathComponent(self.objectName! + "_test")
+            if let jpegRepresentation = UIImageJPEGRepresentation(self.image, 1.0) {
+                try jpegRepresentation.write(to: url)
+            }
+            let container = NSPersistentContainer(name: "CoreData")
+            container.loadPersistentStores { (description, error) in
+                if let error = error {
+                    fatalError("Failed to load store: \(error)")
+                }
+            }
+            let context = container.viewContext
+            let entity = NSEntityDescription.entity(forEntityName: "CDVisualizedObject", in: context)
+            let newVisualizedObject = NSManagedObject(entity: entity!, insertInto: context)
+            newVisualizedObject.setValue(self.objectName, forKey: "objectName")
+            newVisualizedObject.setValue(self.objectName! + "_test", forKey: "imageName")
+            do {
+                try context.save()
+            } catch {
+                print(error)
+            }
+            
+        } catch {
+            print(error)
+        }
+        
     }
     
 }

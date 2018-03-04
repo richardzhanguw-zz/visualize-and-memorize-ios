@@ -34,5 +34,6 @@ class SaveObjectViewController: UIViewController {
     }
     
     func setupUI() {
+        visualizedObject.saveImage()
     }
 }
