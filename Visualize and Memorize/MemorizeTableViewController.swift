@@ -12,10 +12,12 @@ import UIKit
 
 class MemorizeTableViewController: UITableViewController {
     
+    var visualizedObjects: [VisualizedObject]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let fileManager = FileStorageManager()
-        let x = fileManager.getVisualizedObjects()
+        visualizedObjects = fileManager.getVisualizedObjects()
         
     }
     
@@ -24,11 +26,12 @@ class MemorizeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return visualizedObjects.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = MemorizeTableViewCell(withTitle: "Row Title", andImage: UIImage())
+        let index = indexPath.row
+        let cell = MemorizeTableViewCell(withTitle: visualizedObjects[index].objectName, andImage: visualizedObjects[index].image)
         return cell
     }
     

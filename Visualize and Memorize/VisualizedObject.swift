@@ -10,13 +10,26 @@ import Foundation
 import UIKit
 import CoreData
 
-class VisualizedObject {
+class VisualizedObject  {
     var image: UIImage!
-    var imageName: String?
-    var objectName: String?
+    var imageName: String!
+    var objectName: String!
     var fileManager: FileManager!
     init(withImage image: UIImage, andObjectName objectName: String) {
         self.image = image
+        self.objectName = objectName
+    }
+    
+    init(withImageName imageName: String?, andObjectName objectName: String) {
+        self.imageName = imageName
+        self.fileManager = FileManager.default
+        do {
+            let directory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
+            let url = directory.appendingPathComponent(self.imageName)
+            self.image = UIImage(contentsOfFile: url.path)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
         self.objectName = objectName
         self.fileManager = FileManager.default
     }

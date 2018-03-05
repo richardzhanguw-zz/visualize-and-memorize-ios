@@ -25,7 +25,7 @@ class MemorizeTableViewCell: UITableViewCell {
     init(withTitle title: String, andImage image: UIImage? ) {
         super.init(style: UITableViewCellStyle.default, reuseIdentifier: nil)
         rowPicture = UIImageView(frame: CGRect(x: 10, y: 10, width: 60, height: 60))
-        rowPicture.backgroundColor = UIColor.red
+        rowPicture.image = image
         
         rowTitle = UILabel(frame: CGRect(x: self.contentView.frame.width - 80, y: 10, width: 0, height: 0))
         rowTitle.text = title

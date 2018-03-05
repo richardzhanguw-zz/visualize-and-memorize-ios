@@ -21,7 +21,7 @@ class FileStorageManager {
     }
     
     func getVisualizedObjects() -> [VisualizedObject] {
-        var cdVisualizedObjects  = [NSManagedObject]()
+        var cdVisualizedObjects  = [CDVisualizedObject]()
         let container = NSPersistentContainer(name: "CoreData")
         container.loadPersistentStores { (description, error) in
             if let error = error {
@@ -31,10 +31,14 @@ class FileStorageManager {
         let context = container.viewContext
         var fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDVisualizedObject")
         do {
-            cdVisualizedObjects = try context.fetch(fetchRequest) as! [NSManagedObject]
+            cdVisualizedObjects = try context.fetch(fetchRequest) as! [CDVisualizedObject]
         } catch {
             print(error)
         }
-        return [VisualizedObject]()
+        var visualizedObjects = [VisualizedObject]()
+        for object in cdVisualizedObjects {
+            visualizedObjects.append(VisualizedObject(withImageName: object.imageName, andObjectName: object.objectName!))
+        }
+        return visualizedObjects
     }
 }
