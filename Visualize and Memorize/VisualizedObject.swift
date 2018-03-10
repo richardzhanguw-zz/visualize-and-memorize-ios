@@ -16,6 +16,7 @@ class VisualizedObject  {
     var objectName: String!
     var fileManager: FileManager!
     init(withImage image: UIImage, andObjectName objectName: String) {
+        self.fileManager = FileManager.default
         self.image = image
         self.objectName = objectName
     }
