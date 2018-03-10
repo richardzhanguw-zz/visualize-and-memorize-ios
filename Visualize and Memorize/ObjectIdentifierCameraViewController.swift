@@ -41,8 +41,6 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
         refreshScreen()
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         arView.session.run(arSceneConfig)
@@ -102,6 +100,7 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     }
     
     func setupUI() {
+        navigationItem.title = "Visualize"
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
@@ -138,12 +137,16 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     }
     
     @objc func onSpeakButtonClicked(){
-        ttsButton.setImage(UIImage(named: "Volume Up"), for: UIControlState.normal)
-        speak(withPhrase: currentlyDisplayedObjectName)
+        if (currentlyDisplayedObjectName != "") {
+            ttsButton.setImage(UIImage(named: "Volume Up"), for: UIControlState.normal)
+            speak(withPhrase: currentlyDisplayedObjectName)
+        }
     }
     
     @objc func onSaveCurrentObjectButtonClicked(){
-        self.navigationController?.pushViewController(SaveObjectViewController(withVisualizedObject: mostRecentVisualizedObject) , animated: true)
+        if let visualizedObject = mostRecentVisualizedObject {
+            self.navigationController?.pushViewController(SaveObjectViewController(withVisualizedObject: visualizedObject) , animated: true)
+        }
     }
     
     @objc func onIdentifyNewObjectButtonClicked(){

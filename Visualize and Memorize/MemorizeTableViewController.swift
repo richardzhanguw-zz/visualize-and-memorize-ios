@@ -21,6 +21,7 @@ class MemorizeTableViewController: UITableViewController {
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        navigationItem.title = "Memorize"
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
