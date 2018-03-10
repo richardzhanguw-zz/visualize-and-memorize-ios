@@ -16,24 +16,33 @@ class SaveObjectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        objectImageView = UIImageView(image: visualizedObject.image)
-        objectImageView.frame = self.view.frame
-        view.addSubview(self.objectImageView)
+        setupUI()
     }
     
     init(withVisualizedObject object: VisualizedObject) {
         super.init(nibName: nil, bundle: nil)
         visualizedObject = object
-        setupUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(nibName: nil, bundle: nil)
-        setupUI()
     }
     
     func setupUI() {
+        objectImageView = UIImageView(image: visualizedObject.image)
+        if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
+            let frame = CGRect(x: 0, y: keyWindow.safeAreaInsets.top, width: view.frame.width  , height: view.frame.height - keyWindow.safeAreaInsets.top - keyWindow.safeAreaInsets.bottom)
+            objectImageView.frame = frame
+        } else {
+            objectImageView.frame = view.frame
+        }
+        let saveButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.plain, target: self, action: #selector(saveObjectImage))
+        navigationItem.rightBarButtonItem = saveButtonItem
+        view.addSubview(objectImageView)
+    }
+    
+    @objc func saveObjectImage() {
         visualizedObject.saveImage()
+        self.navigationController!.popToRootViewController(animated: true)
     }
 }

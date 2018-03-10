@@ -45,14 +45,11 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
         arView.session.run(arSceneConfig)
     }
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
         arView.session.pause()
     }
     
@@ -105,19 +102,23 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     }
     
     func setupUI() {
-        arView = ARSCNView(frame: CGRect(x: 0, y: view.safeAreaInsets.top, width: view.frame.width, height: view.frame.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom))
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        var identifyNewObjectButtonFrame: CGRect
+        if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
+             arView = ARSCNView(frame: CGRect(x: 0, y: keyWindow.safeAreaInsets.top, width: view.frame.width, height: view.frame.height - keyWindow.safeAreaInsets.top - keyWindow.safeAreaInsets.bottom))
+            identifyNewObjectButtonFrame = CGRect(x: view.frame.width/2 - 35, y: view.frame.height - keyWindow.safeAreaInsets.bottom - 80.0, width: 70, height: 70)
+        } else {
+             arView = ARSCNView(frame: CGRect(x: 0, y: view.safeAreaInsets.top, width: view.frame.width, height: view.frame.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom))
+            identifyNewObjectButtonFrame = CGRect(x: view.frame.width/2, y: view.frame.height - 80.0, width: 70, height: 70)
+        }
         view.addSubview(arView)
         arView.delegate = self
         arView.scene = SCNScene()
         arSceneConfig.planeDetection = .horizontal
         var ttsButtonFrame: CGRect
-        var identifyNewObjectButtonFrame: CGRect
         var saveCurrentObjectButtonFrame: CGRect
-        if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
-            identifyNewObjectButtonFrame = CGRect(x: view.frame.width/2 - 35, y: view.frame.height - keyWindow.safeAreaInsets.bottom - 80.0, width: 70, height: 70)
-        } else {
-            identifyNewObjectButtonFrame = CGRect(x: view.frame.width/2, y: view.frame.height - 80.0, width: 70, height: 70)
-        }
         ttsButtonFrame = CGRect(x: identifyNewObjectButtonFrame.maxX + 10 , y: identifyNewObjectButtonFrame.minY, width: 70, height: 70 )
         saveCurrentObjectButtonFrame = CGRect(x: identifyNewObjectButtonFrame.minX - 80.0, y: identifyNewObjectButtonFrame.minY , width: 70, height: 70 )
         ttsButton = RoundButton(withFrame:ttsButtonFrame , andButtonColour: UIColor.red, andImage: UIImage(named: "Volume Mute")!)

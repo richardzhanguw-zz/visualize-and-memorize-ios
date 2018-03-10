@@ -18,7 +18,9 @@ class MemorizeTableViewController: UITableViewController {
         super.viewDidLoad()
         let fileManager = FileStorageManager()
         visualizedObjects = fileManager.getVisualizedObjects()
-        
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,5 +39,9 @@ class MemorizeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

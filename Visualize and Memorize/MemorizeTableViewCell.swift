@@ -27,13 +27,13 @@ class MemorizeTableViewCell: UITableViewCell {
         rowPicture = UIImageView(frame: CGRect(x: 10, y: 10, width: 60, height: 60))
         rowPicture.image = image
         
-        rowTitle = UILabel(frame: CGRect(x: self.contentView.frame.width - 80, y: 10, width: 0, height: 0))
+        rowTitle = UILabel()
+        let frame = CGRect(x: rowPicture.frame.maxX + 40, y: 20, width: 0, height: 0)
+        rowTitle.frame = frame
         rowTitle.text = title
         rowTitle.sizeToFit()
         
-        
         self.contentView.addSubview(rowPicture)
         self.contentView.addSubview(rowTitle)
-        
     }
 }
