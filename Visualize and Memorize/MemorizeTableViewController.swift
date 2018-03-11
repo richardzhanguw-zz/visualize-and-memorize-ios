@@ -44,5 +44,6 @@ class MemorizeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(VisualizedObjectMoreInfoViewController(withVisualizedObject: visualizedObjects[indexPath.row]), animated: true)
     }
 }

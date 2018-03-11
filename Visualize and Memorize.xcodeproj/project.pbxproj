@@ -24,6 +24,7 @@
 		81498D2A2048FCC8003A8942 /* FileStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81498D292048FCC8003A8942 /* FileStorageManager.swift */; };
 		8156CBFA2047AB4D009CB80D /* MemorizeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8156CBF92047AB4D009CB80D /* MemorizeTableViewController.swift */; };
 		8156CBFC2047ACD3009CB80D /* MemorizeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8156CBFB2047ACD3009CB80D /* MemorizeTableViewCell.swift */; };
+		81923CB12054B4F7002F084E /* VisualizedObjectMoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81923CB02054B4F7002F084E /* VisualizedObjectMoreInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		81498D292048FCC8003A8942 /* FileStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageManager.swift; sourceTree = "<group>"; };
 		8156CBF92047AB4D009CB80D /* MemorizeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeTableViewController.swift; sourceTree = "<group>"; };
 		8156CBFB2047ACD3009CB80D /* MemorizeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeTableViewCell.swift; sourceTree = "<group>"; };
+		81923CB02054B4F7002F084E /* VisualizedObjectMoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizedObjectMoreInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				81498D292048FCC8003A8942 /* FileStorageManager.swift */,
 				8124478F204A4E090043EB34 /* SaveObjectViewController.swift */,
 				81492CFF204CA5080060B3C9 /* CoreData.xcdatamodeld */,
+				81923CB02054B4F7002F084E /* VisualizedObjectMoreInfoViewController.swift */,
 			);
 			path = "Visualize and Memorize";
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8126A8A520427A9E0090378C /* HomeTableViewCell.swift in Sources */,
+				81923CB12054B4F7002F084E /* VisualizedObjectMoreInfoViewController.swift in Sources */,
 				8156CBFC2047ACD3009CB80D /* MemorizeTableViewCell.swift in Sources */,
 				8126A8A120424B6B0090378C /* RoundButton.swift in Sources */,
 				81244AB020311E1E00BF7CCB /* ObjectIdentifierCameraViewController.swift in Sources */,
