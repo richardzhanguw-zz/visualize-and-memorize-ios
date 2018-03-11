@@ -20,7 +20,7 @@ class FileStorageManager {
         
     }
     
-    func getVisualizedObjects() -> [VisualizedObject] {
+    static func getVisualizedObjects() -> [VisualizedObject] {
         var cdVisualizedObjects  = [CDVisualizedObject]()
         let container = NSPersistentContainer(name: "CoreData")
         container.loadPersistentStores { (description, error) in
@@ -40,5 +40,28 @@ class FileStorageManager {
             visualizedObjects.append(VisualizedObject(withImageName: object.imageName, andObjectName: object.objectName!))
         }
         return visualizedObjects
+    }
+    
+    static func delete(visualizedObject: VisualizedObject){
+        var cdVisualizedObjects  = [CDVisualizedObject]()
+        let container = NSPersistentContainer(name: "CoreData")
+        container.loadPersistentStores { (description, error) in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+        }
+        let context = container.viewContext
+        var fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDVisualizedObject")
+        do {
+            cdVisualizedObjects = try context.fetch(fetchRequest) as! [CDVisualizedObject]
+            for object in cdVisualizedObjects {
+                if(object.objectName! == visualizedObject.objectName){
+                    context.delete(object)
+                    try context.save()
+                }
+            }
+        } catch {
+            print(error)
+        }
     }
 }

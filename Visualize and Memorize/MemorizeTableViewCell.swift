@@ -22,8 +22,7 @@ class MemorizeTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    init(withTitle title: String, andImage image: UIImage? ) {
-        super.init(style: UITableViewCellStyle.default, reuseIdentifier: nil)
+    func update(withTitle title: String, andImage image: UIImage? ) {
         rowPicture = UIImageView(frame: CGRect(x: 10, y: 10, width: 60, height: 60))
         rowPicture.image = image
         
