@@ -106,7 +106,7 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         var identifyNewObjectButtonFrame: CGRect
         if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
-             arView = ARSCNView(frame: CGRect(x: 0, y: keyWindow.safeAreaInsets.top, width: view.frame.width, height: view.frame.height - keyWindow.safeAreaInsets.top - keyWindow.safeAreaInsets.bottom))
+             arView = ARSCNView(frame: CGRect(x: keyWindow.safeAreaInsets.left, y: (navigationController?.navigationBar.frame.maxY)!, width: view.frame.width, height: view.frame.height - keyWindow.safeAreaInsets.top - keyWindow.safeAreaInsets.bottom))
             identifyNewObjectButtonFrame = CGRect(x: view.frame.width/2 - 35, y: view.frame.height - keyWindow.safeAreaInsets.bottom - 80.0, width: 70, height: 70)
         } else {
              arView = ARSCNView(frame: CGRect(x: 0, y: view.safeAreaInsets.top, width: view.frame.width, height: view.frame.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom))

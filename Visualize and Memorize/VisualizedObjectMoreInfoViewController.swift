@@ -30,6 +30,9 @@ class VisualizedObjectMoreInfoViewController: UIViewController {
     }
     
     func setupUI(){
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         view.backgroundColor = UIColor.white
         if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
             visualizedObjectImageView = UIImageView(frame: CGRect(x: 0, y: (navigationController?.navigationBar.frame.maxY)!, width: view.frame.width, height: view.frame.height - (navigationController?.navigationBar.frame.maxY)! - keyWindow.safeAreaInsets.bottom - 100))

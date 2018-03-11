@@ -34,7 +34,7 @@ class SaveObjectViewController: UIViewController {
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         objectImageView = UIImageView(image: visualizedObject.image)
         if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
-            let frame = CGRect(x: 0, y: keyWindow.safeAreaInsets.top, width: view.frame.width  , height: view.frame.height - keyWindow.safeAreaInsets.top - keyWindow.safeAreaInsets.bottom)
+            let frame = CGRect(x: keyWindow.safeAreaInsets.left, y: (navigationController?.navigationBar.frame.maxY)!, width: view.frame.width  , height: view.frame.height - keyWindow.safeAreaInsets.top - keyWindow.safeAreaInsets.bottom)
             objectImageView.frame = frame
         } else {
             objectImageView.frame = view.frame
