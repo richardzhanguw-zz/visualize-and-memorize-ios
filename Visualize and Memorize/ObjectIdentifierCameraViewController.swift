@@ -77,6 +77,7 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
         text.chamferRadius = CGFloat(0.02)
         text.alignmentMode = kCAAlignmentCenter
         text.font = UIFont(name: "Courier-Bold", size: 0.1)
+        text.firstMaterial?.diffuse.contents = UIColor.blue
         let textNode = SCNNode(geometry: text)
         textNode.scale = SCNVector3Make(0.15, 0.15, 0.15)
         textNode.pivot = SCNMatrix4MakeTranslation( (text.boundingBox.max.x - text.boundingBox.min.x)/2, text.boundingBox.min.y, Float(depth))
