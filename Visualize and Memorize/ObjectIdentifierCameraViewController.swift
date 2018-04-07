@@ -108,8 +108,9 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
             }
         }
     }
-    asdfadf
+    
     func setupUI() {
+        //this is a test
         view.addSubview(arView)
         navigationItem.title = "Visualize"
         let backButton = UIBarButtonItem()
