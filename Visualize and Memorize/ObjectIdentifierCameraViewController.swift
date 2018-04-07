@@ -108,7 +108,7 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
             }
         }
     }
-    
+    asdfadf
     func setupUI() {
         view.addSubview(arView)
         navigationItem.title = "Visualize"
