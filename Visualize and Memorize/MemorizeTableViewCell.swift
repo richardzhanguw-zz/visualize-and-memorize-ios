@@ -11,8 +11,16 @@ import UIKit
 
 class MemorizeTableViewCell: UITableViewCell {
     //currently a static cell until stored data can be retrieved
-    var rowPicture: UIImageView!
-    var rowTitle: UILabel!
+    fileprivate lazy var rowPicture: UIImageView = {
+        let rowPicture = UIImageView(frame: CGRect(x: 10, y: 10, width: 60, height: 60))
+        return rowPicture
+    } ()
+    fileprivate lazy var rowTitle: UILabel = {
+        let rowTitle = UILabel()
+        let frame = CGRect(x: rowPicture.frame.maxX + 40, y: 20, width: 0, height: 0)
+        rowTitle.frame = frame
+        return rowTitle
+    } ()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,12 +31,8 @@ class MemorizeTableViewCell: UITableViewCell {
     }
     
     func update(withTitle title: String, andImage image: UIImage? ) {
-        rowPicture = UIImageView(frame: CGRect(x: 10, y: 10, width: 60, height: 60))
         rowPicture.image = image
         
-        rowTitle = UILabel()
-        let frame = CGRect(x: rowPicture.frame.maxX + 40, y: 20, width: 0, height: 0)
-        rowTitle.frame = frame
         rowTitle.text = title
         rowTitle.sizeToFit()
         

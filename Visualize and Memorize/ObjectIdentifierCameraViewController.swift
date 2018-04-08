@@ -33,9 +33,9 @@ class ObjectIdentifierCameraViewController: UIViewController, ARSCNViewDelegate,
     fileprivate var nodeCount = 0
     fileprivate var mostRecentVisualizedObject: VisualizedObject!
     
-    let customDispatchQueue = DispatchQueue(label: "Custom Dispatch Queue")
-    let arSceneConfig = ARWorldTrackingConfiguration()
-    let speaker = AVSpeechSynthesizer()
+    fileprivate let customDispatchQueue = DispatchQueue(label: "Custom Dispatch Queue")
+    fileprivate let arSceneConfig = ARWorldTrackingConfiguration()
+    fileprivate let speaker = AVSpeechSynthesizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()

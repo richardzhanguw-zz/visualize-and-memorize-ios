@@ -12,11 +12,13 @@ import UIKit
 
 class MemorizeTableViewController: UITableViewController {
     
-    var visualizedObjects: [VisualizedObject]!
+    fileprivate lazy var visualizedObjects: [VisualizedObject] = {
+        let visualizedObjects = FileStorageManager.getVisualizedObjects()
+        return visualizedObjects
+    } ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        visualizedObjects = FileStorageManager.getVisualizedObjects()
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton

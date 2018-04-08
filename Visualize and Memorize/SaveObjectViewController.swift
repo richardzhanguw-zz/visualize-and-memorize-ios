@@ -11,8 +11,10 @@ import UIKit
 
 class SaveObjectViewController: UIViewController {
     
-    var visualizedObject: VisualizedObject!
-    var objectImageView: UIImageView!
+    fileprivate var visualizedObject: VisualizedObject?
+    fileprivate lazy var objectImageView: UIImageView = {
+        return UIImageView()
+    } ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +34,10 @@ class SaveObjectViewController: UIViewController {
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        objectImageView = UIImageView(image: visualizedObject.image)
+        objectImageView.image  = visualizedObject?.image
+        
         if #available(iOS 11.0, *), let keyWindow = UIApplication.shared.delegate!.window! {
-            let frame = CGRect(x: keyWindow.safeAreaInsets.left, y: (navigationController?.navigationBar.frame.maxY)!, width: view.frame.width  , height: view.frame.height - keyWindow.safeAreaInsets.top - keyWindow.safeAreaInsets.bottom)
+            let frame = CGRect(x: keyWindow.safeAreaInsets.left, y: (navigationController?.navigationBar.frame.maxY)!, width: view.frame.width, height: view.frame.height - keyWindow.safeAreaInsets.top - keyWindow.safeAreaInsets.bottom)
             objectImageView.frame = frame
         } else {
             objectImageView.frame = view.frame
@@ -45,7 +48,7 @@ class SaveObjectViewController: UIViewController {
     }
     
     @objc func saveObjectImage() {
-        visualizedObject.saveImage()
-        self.navigationController!.popToRootViewController(animated: true)
+        visualizedObject?.saveImage()
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
