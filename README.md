@@ -1,6 +1,6 @@
 # Visualize and Memorize
-This project is an iOS app to help its users learn English by recognizing objects in real-life (visualizing) and review their own example images for words later (memorizing).
-You can also listen to the word's proper pronunciation using the text-to-speech button.
+This project is an iOS app to help its users learn English by recognizing objects in real-life (visualizing) and review their own example images for words later (memorizing). You can also listen to the word's proper pronunciation using the text-to-speech button. This project was implemented using ARKit and Vision.
+
 
 ## Visualize Section Demo:
 
